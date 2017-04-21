@@ -1,0 +1,14 @@
+application/*
+system/*
+index.php
+
+
+!application/controllers/
+application/controllers/index.html
+
+!application/views/
+application/views/errors/*
+application/views/index.html
+
+!application/models/
+application/models/index.html
