@@ -71,3 +71,9 @@ CREATE TABLE semantic_annotation (
     FOREIGN KEY (id_workflow) REFERENCES workflow(id),
     FOREIGN KEY (id_metadata) REFERENCES tag(id)
 );
+
+INSERT INTO ontology (`name`, `prefix`, `iri`, `color`, `created_at` )
+VALUES ('edam', 'EDAM', 'http://edamontology.org', '#009688', NOW());
+
+INSERT INTO ontology (`name`, `prefix`, `iri`, `color`, `created_at` )
+VALUES ('cheminf', 'CHEMINF', 'http://purl.obolibrary.org/obo/cheminf', '#FF9800', NOW());
