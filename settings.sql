@@ -38,11 +38,12 @@ CREATE TABLE ontology (
 CREATE TABLE ontology_concept (
     `id` INT NOT NULL AUTO_INCREMENT,
     `id_ontology` INT NOT NULL,
+    `iri_parent` TEXT,
     `label` TEXT,
-    `description` TEXT NOT NULL,
+    `description` TEXT,
     `iri` TEXT NOT NULL,
     `short_form` TEXT NOT NULL,
-    `obo_id` TEXT NOT NULL,
+    `obo_id` TEXT,
     `created_at` DATETIME NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_ontology) REFERENCES ontology(id)
