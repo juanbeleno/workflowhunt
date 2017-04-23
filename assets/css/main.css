@@ -1,0 +1,189 @@
+html, body {
+    height: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    background: #fafafa;
+    border-top: 1px solid #2196f3;
+    font-size: 16px;
+    font-family: 'Lato', sans-serif, Helvetica, Arial;
+    color: #828587;
+}
+
+/******************************** Home Page **********************************/
+
+.home-btn-search, .results-btn-search{
+    padding: 0.625em 0.75em;
+}
+
+.home-container{
+	margin-top: 10%;
+}
+
+.home-input-search, .results-input-search{
+    padding: 0.625em;
+}
+
+.home-logo{
+	height: 9.5em;
+	width: 9.5em;
+}
+
+.home-text{
+    margin-top: 1em;
+}
+
+.home-wh-title{
+	color: #666666;
+	font-size: 1.85em;
+	margin-bottom: 1em;
+}
+
+/******************************* Results Page ********************************/
+
+.results-container{
+    margin-top: 0.75em;
+}
+
+.results-logo{
+    height: 2.75em;
+    width: 2.75em;
+    margin-bottom: 0.5em;
+}
+
+.results-workflow{
+    margin-bottom: 1.5em;
+}
+
+.results-workflow-title{
+    display: block;
+    font-size: 1.125em;
+    font-weight: bold;
+}
+
+.results-workflow-url{
+    color: #4caf50;
+}
+
+.results-workflow-wfms{
+    font-size: 0.85em;
+    color: #757575;
+}
+
+.results-semantic-annotations{
+    font-size: 0.85em;
+    color: #757575;
+}
+
+.results-span-analytics{
+    color: #FC7A85;
+    cursor: pointer;
+}
+
+.results-analytic-box{
+    border: 1px solid #EBEBEB;
+    border-radius: 2px;
+    padding: 1.5rem 1rem;
+    margin-bottom: 1rem;
+    background: white;
+}
+
+.results-analytic-title{
+    color: #292929;
+    font-size: 1rem;
+}
+
+.results-analytic-description{
+    margin-top: 0.5rem;
+    color: #777777;
+    font-size: 0.85rem;
+}
+
+.results-analytic-list{
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    padding-left: 1.2rem;
+    margin-bottom: 0;
+}
+
+.results-analytic-author{
+    color: #292929;
+    margin-top: 1rem;
+}
+
+.results-analytic-author-thumbnail{
+    width: 3.5rem;
+    height: 3.5rem;
+    float: right;
+}
+
+.results-analytic-author-content{
+    font-size: 0.85rem;
+    height: 3.5rem;
+}
+
+.page-item{
+    position: relative;
+    float: left;
+    padding: .275rem .75rem;
+    font-size: .875rem;
+    margin-left: -1px;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.page-item>a{
+    color: #0275d8;
+}
+
+.results-tab{
+    text-align: center;
+    font-size: 14px;
+    width: 80px; 
+    cursor: pointer;
+    display: inline-block;
+    padding: 1rem 0px;
+    margin-bottom: -1rem;
+    margin-right: 1rem;
+    color: #828587;
+}
+
+.results-tab:active, .results-tab:focus, .results-tab:hover{
+    color: #828587;
+    text-decoration: none;
+}
+
+.results-tab-active{
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 1rem 0px;
+    width: 80px; 
+    margin-bottom: -1rem;
+    font-weight: bold;
+    color: #2196f3;
+    border-bottom: 2px solid #2196f3;
+}
+
+.results-tab-active:active, .results-tab-active:focus, .results-tab-active:hover{
+    color: #2196f3;
+    text-decoration: none;
+}
+
+/******************************* Workflow Page ********************************/
+
+.margin-top-05{
+    margin-top: 0.5em;
+}
+
+.ontology-square-color{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+}
+
+.ontology-text{
+    vertical-align: text-bottom;
+}
