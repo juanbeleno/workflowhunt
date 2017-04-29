@@ -241,8 +241,8 @@ class Semantic_model extends CI_Model {
         $this->db->where('id', $id_workflow);
         $db_query_workflow = $this->db->get('workflow', 1, 0);
         $workflow = $db_query_workflow->row();
-        $title = $workflow->title;
-        $description = $workflow->description;
+        $title = " ".$workflow->title." ";
+        $description = " ".$workflow->description." ";
         $sem_annotations = array();
 
         // Getting the workflow tags
@@ -271,9 +271,9 @@ class Semantic_model extends CI_Model {
         $ontology_terms_query = $this->db->get();
         
         foreach ($ontology_terms_query->result() as $term) {
-            $title = highlight_phrase($title, $term->string, '<strong style="color:'.$term->color.';">', '</strong>');
-            $description = highlight_phrase($description, $term->string, '<strong style="color:'.$term->color.';">', '</strong>');
-            $tags = highlight_phrase($tags, $term->string, '<strong style="color:'.$term->color.';">', '</strong>');
+            $title = highlight_phrase($title, " ".$term->string." ", '<strong style="color:'.$term->color.';">', '</strong>');
+            $description = highlight_phrase($description, " ".$term->string." ", '<strong style="color:'.$term->color.';">', '</strong>');
+            $tags = highlight_phrase($tags, " ".$term->string." ", '<strong style="color:'.$term->color.';">', '</strong>');
 
             $sem_annotations[$term->id] = array(
                 'concept' => $term->id,
@@ -308,9 +308,9 @@ class Semantic_model extends CI_Model {
             'status' => 'OK',
             'workflow' =>   array(
                                 'id' => $id_workflow,
-                                'title' => $title,
-                                'description' => $description,
-                                'tags' => $tags
+                                'title' => trim($title),
+                                'description' => trim($description),
+                                'tags' => trim($tags)
                             ),
             'ontologies' => $ontology_query->result(),
             'annotations' => $semantic_annotations
