@@ -170,15 +170,14 @@ class Elasticsearch_model extends CI_Model {
 			}
 
 			// Find the semantic annotations
-			$this->db->select('ontology_concept.short_form AS short_form, ontology.prefix AS prefix');
+			$this->db->select('ontology_concept.complete_short_form AS complete_short_form');
 			$this->db->from('semantic_annotation');
 			$this->db->join('ontology_concept', 'ontology_concept.id = semantic_annotation.id_ontology_concept');
-			$this->db->join('ontology', 'ontology_concept.id_ontology = ontology.id');
 			$this->db->where('semantic_annotation.id_workflow', $id_workflow);
 			$query_sem_annotations = $this->db->get();
 
 			foreach ($query_sem_annotations->result() as $annotation) {
-				$semantic_annotations[] =  $annotation->prefix.':'.$annotation->short_form;
+				$semantic_annotations[] =  $annotation->complete_short_form;
 			}
 
 			// Seting up the metadata
@@ -362,7 +361,7 @@ class Elasticsearch_model extends CI_Model {
 	    	}
 
 	    	$query = replace_semantic_concepts_in_text($dictionary, $query);
-
+	    	
     		// Seting up the query
 			$params = [
 			    'index' => 'olympus_index', // Zeus' kingdom
