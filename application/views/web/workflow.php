@@ -85,7 +85,34 @@
 					}
 				?>
 				</div>
-				</br>
+				<div class="margin-top-05">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>Ontology Concept</th>
+								<th>Ontology Term</th>
+								<th>Term Type</th>
+								<th>Ontology</th>
+								<th>Annotation Type</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+								foreach ($annotations as $annotation) {
+							?>
+								<tr>
+									<td><?php print $annotation['label']; ?></td>
+									<td><?php print $annotation['string']; ?></td>		
+									<td><?php print $annotation['type']; ?></td>
+									<td><?php print $annotation['ontology']; ?></td>
+									<td><?php print $annotation['annotation_type']; ?></td>			
+								</tr>
+							<?php
+								}
+							?>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<!-- .col-lg-10 .col-xl-10 .offset-lg-2 .offset-xl-2-->
 		</div>

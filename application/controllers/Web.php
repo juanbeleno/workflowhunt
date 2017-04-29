@@ -7,6 +7,7 @@ class Web extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('elasticsearch_model');
+        $this->load->model('semantic_model');
     }
 
 	public function index()
@@ -63,6 +64,19 @@ class Web extends CI_Controller {
 		$data['pagination'] = $this->pagination;
 
 		$this->load->view('web/results', $data);
+	}
+
+	public function workflow()
+	{
+		$id_workflow = @$this->input->get('id', TRUE);
+		$response = $this->semantic_model->show($id_workflow);
+		$data['title'] = @$response['workflow']['title'];
+		$data['description'] = @$response['workflow']['description'];
+		$data['tags'] = @$response['workflow']['tags'];
+		$data['id'] = @$response['workflow']['id'];
+		$data['ontologies'] = @$response['ontologies'];
+		$data['annotations'] = @$response['annotations'];
+		$this->load->view('web/workflow', $data);
 	}
 
 }

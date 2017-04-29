@@ -182,7 +182,7 @@ class Semantic_model extends CI_Model {
 	 * Expand the initial set of semantic annotations
 	 *
 	 * It uses generalization to get expanded semantic annotations from the 
-	 + ontology concept parents.
+	 * ontology concept parents.
 	 *
 	 * @return	array
 	 */
@@ -221,6 +221,84 @@ class Semantic_model extends CI_Model {
     	}
 
     	return array('status' => 'OK');
+    }
+
+    // --------------------------------------------------------------------
+
+    /**
+     * Show the Workflow Details with Semantic Annotations
+     *
+     * I received the workflow identificator and show title, descriptions, and
+     * tags. Moreover, we show the semantic annotations.
+     *
+     * @param   int $id_workflow   Workflow identificator
+     * @return  array
+     */
+    public function show($id_workflow)
+    {
+    	// Getting title and description
+        $this->db->select('title, description');
+        $this->db->where('id', $id_workflow);
+        $db_query_workflow = $this->db->get('workflow', 1, 0);
+        $workflow = $db_query_workflow->row();
+        $title = $workflow->title;
+        $description = $workflow->description;
+        $sem_annotations = array();
+
+        // Getting the workflow tags
+        $this->db->select('name');
+        $this->db->where('id_workflow', $id_workflow);
+        $this->db->from('tag');
+        $this->db->join('tag_wf', 'tag_wf.id_tag = tag.id');
+        $db_tags_query = $this->db->get();
+        $tags = " ";
+
+        foreach ($db_tags_query->result() as $tag) {
+            $tags .= $tag->name.' - ';
+        }
+
+        // Load Text Helper
+        $this->load->helper('text');
+
+        // Highlighting the semantic annotations
+        $this->db->select('string, color, prefix, label, annotation_type, type');
+        $this->db->from('semantic_annotation');
+        $this->db->join('ontology_concept', 'ontology_concept.id = semantic_annotation.id_ontology_concept');
+        $this->db->join('ontology_term', 'ontology_term.id_ontology_concept = ontology_concept.id');
+        $this->db->join('ontology', 'ontology.id = ontology_concept.id_ontology');
+        $this->db->where('semantic_annotation.id_workflow', $id_workflow);
+        $this->db->order_by('LENGTH(string)', 'desc');
+        $ontology_terms_query = $this->db->get();
+        
+        foreach ($ontology_terms_query->result() as $term) {
+            $title = highlight_phrase($title, $term->string, '<strong style="color:'.$term->color.';">', '</strong>');
+            $description = highlight_phrase($description, $term->string, '<strong style="color:'.$term->color.';">', '</strong>');
+            $tags = highlight_phrase($tags, $term->string, '<strong style="color:'.$term->color.';">', '</strong>');
+
+            $sem_annotations[] = array(
+            	'label' => $term->label,
+            	'string' => $term->string,
+            	'type' => $term->type,
+            	'ontology' => $term->prefix,
+            	'annotation_type' =>  $term->annotation_type
+            );
+        }
+
+        // Ontologies
+        $this->db->select('prefix, color');
+        $ontology_query = $this->db->get('ontology');
+
+        return array(
+            'status' => 'OK',
+            'workflow' =>   array(
+                                'id' => $id_workflow,
+                                'title' => $title,
+                                'description' => $description,
+                                'tags' => $tags
+                            ),
+            'ontologies' => $ontology_query->result(),
+            'annotations' => $sem_annotations
+        );
     }
 
 }
