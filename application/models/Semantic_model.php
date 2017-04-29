@@ -261,7 +261,7 @@ class Semantic_model extends CI_Model {
         $this->load->helper('text');
 
         // Highlighting the semantic annotations
-        $this->db->select('string, color, prefix, label, annotation_type, type');
+        $this->db->select('string, color, prefix, label, annotation_type, ontology_concept.id AS id');
         $this->db->from('semantic_annotation');
         $this->db->join('ontology_concept', 'ontology_concept.id = semantic_annotation.id_ontology_concept');
         $this->db->join('ontology_term', 'ontology_term.id_ontology_concept = ontology_concept.id');
@@ -275,13 +275,29 @@ class Semantic_model extends CI_Model {
             $description = highlight_phrase($description, $term->string, '<strong style="color:'.$term->color.';">', '</strong>');
             $tags = highlight_phrase($tags, $term->string, '<strong style="color:'.$term->color.';">', '</strong>');
 
-            $sem_annotations[] = array(
+            $sem_annotations[$term->id] = array(
+                'concept' => $term->id,
             	'label' => $term->label,
-            	'string' => $term->string,
-            	'type' => $term->type,
             	'ontology' => $term->prefix,
             	'annotation_type' =>  $term->annotation_type
             );
+        }
+
+        $semantic_annotations = array();
+
+        // Getting the ontology terms for the semantic annotations
+        foreach ($sem_annotations as $key => $annotation) {   
+            $terms = "";
+            $this->db->select('string');
+            $this->db->where('id_ontology_concept', $annotation['concept']);
+            $query_terms = $this->db->get('ontology_term');
+
+            foreach ($query_terms->result() as $term) {
+                $terms .= $term->string.' - ';
+            }
+
+            $annotation['terms'] = $terms;
+            $semantic_annotations[] = $annotation;
         }
 
         // Ontologies
@@ -297,7 +313,7 @@ class Semantic_model extends CI_Model {
                                 'tags' => $tags
                             ),
             'ontologies' => $ontology_query->result(),
-            'annotations' => $sem_annotations
+            'annotations' => $semantic_annotations
         );
     }
 

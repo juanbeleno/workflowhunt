@@ -90,8 +90,7 @@
 						<thead>
 							<tr>
 								<th>Ontology Concept</th>
-								<th>Ontology Term</th>
-								<th>Term Type</th>
+								<th>Ontology Terms</th>
 								<th>Ontology</th>
 								<th>Annotation Type</th>
 							</tr>
@@ -102,8 +101,7 @@
 							?>
 								<tr>
 									<td><?php print $annotation['label']; ?></td>
-									<td><?php print $annotation['string']; ?></td>		
-									<td><?php print $annotation['type']; ?></td>
+									<td><?php print $annotation['terms']; ?></td>
 									<td><?php print $annotation['ontology']; ?></td>
 									<td><?php print $annotation['annotation_type']; ?></td>			
 								</tr>
