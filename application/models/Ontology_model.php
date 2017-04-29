@@ -117,7 +117,7 @@ class Ontology_model extends CI_Model {
 				{ 
 					$concept = $concepts[$i];
 
-					if(!is_null($concept))
+					if(!is_null($concept) && !$concept->{'is_obsolete'})
 					{
 						// Getting information from ontology concept parents
 						$links = $concept->{'_links'};

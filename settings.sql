@@ -64,6 +64,8 @@ CREATE TABLE semantic_annotation (
     `id` INT NOT NULL AUTO_INCREMENT,
     `id_ontology_concept` INT NOT NULL,
     `id_workflow` INT NOT NULL,
+    `annotation_type` TEXT NOT NULL,
+    `distance` INT NOT NULL,
     `id_metadata` INT,
     `metadata_type` TEXT NOT NULL,
     `created_at` DATETIME NOT NULL,
