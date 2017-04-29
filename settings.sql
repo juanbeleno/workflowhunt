@@ -52,6 +52,7 @@ CREATE TABLE ontology_concept (
 CREATE TABLE ontology_term (
     `id` INT NOT NULL AUTO_INCREMENT,
     `id_ontology_concept` INT NOT NULL,
+    `concept_identifier` TEXT NOT NULL,
     `string` TEXT NOT NULL,
     `type` TEXT NOT NULL,
     `source` TEXT NOT NULL,

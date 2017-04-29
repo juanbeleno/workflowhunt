@@ -18,21 +18,51 @@ class Elasticsearch extends CI_Controller {
 	         ->set_output(json_encode($response));
 	}
 
-	public function restart_index_metadata()
+	public function index_semantics()
 	{
-		$response = $this->elasticsearch_model->restart_index_metadata();
+		$response = $this->elasticsearch_model->index_semantics();
 
 		$this->output
 	         ->set_content_type('application/json')
 	         ->set_output(json_encode($response));
 	}
 
-	public function search_in_metadata()
+	public function restart_metadata_index()
+	{
+		$response = $this->elasticsearch_model->restart_metadata_index();
+
+		$this->output
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response));
+	}
+
+	public function restart_semantic_index()
+	{
+		$response = $this->elasticsearch_model->restart_semantic_index();
+
+		$this->output
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response));
+	}
+
+	public function keyword_search()
 	{
 		$query = @$this->input->get('query', TRUE);
 		$offset = $this->input->get('offset', TRUE);
 
-		$response = $this->elasticsearch_model->search_in_metadata($query, $offset);
+		$response = $this->elasticsearch_model->keyword_search($query, $offset);
+
+		$this->output
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response));
+	}
+
+	public function semantic_search()
+	{
+		$query = @$this->input->get('query', TRUE);
+		$offset = $this->input->get('offset', TRUE);
+
+		$response = $this->elasticsearch_model->semantic_search($query, $offset);
 
 		$this->output
 	         ->set_content_type('application/json')

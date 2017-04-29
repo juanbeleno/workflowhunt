@@ -136,6 +136,7 @@ class Ontology_model extends CI_Model {
 							'description' => $concept->description[0],
 							'iri' => $concept->iri,
 							'short_form' => $concept->short_form,
+							'complete_short_form' => $ontology->prefix.':'.$concept->short_form,
 							'obo_id' => $concept->obo_id,
 							'created_at' => date("Y-m-d H:i:s")
 						);

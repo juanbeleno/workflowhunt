@@ -24,12 +24,11 @@ class Web extends CI_Controller {
 		
 		if($method == "semantics")
 		{
-			// TODO: replace by semantic-based search
-			$response = $this->elasticsearch_model->search_in_metadata($query, $offset);
+			$response = $this->elasticsearch_model->semantic_search($query, $offset);
 		}
 		else
 		{
-			$response = $this->elasticsearch_model->search_in_metadata($query, $offset);
+			$response = $this->elasticsearch_model->keyword_search($query, $offset);
 		}
 
 		$data['query'] = @$query;
