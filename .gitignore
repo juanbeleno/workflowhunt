@@ -12,3 +12,6 @@ application/views/index.html
 
 !application/models/
 application/models/index.html
+
+!application/helpers/
+application/helpers/index.html

@@ -361,7 +361,6 @@ class Elasticsearch_model extends CI_Model {
 	    	}
 
 	    	$query = replace_semantic_concepts_in_text($dictionary, $query);
-	    	print($query);
 	    	
     		// Seting up the query
 			$params = [
