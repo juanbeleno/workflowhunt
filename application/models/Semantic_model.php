@@ -80,7 +80,12 @@ class Semantic_model extends CI_Model {
     	$dictionary_query = $this->db->get('ontology_term');
 
     	foreach ($dictionary_query->result() as $term) {
-    		$dictionary[$term->string] = $term->id_ontology_concept;
+    		$term->string = strtolower($term->string);
+    		if(isset($dictionary[$term->string])){
+    			array_push($dictionary[$term->string], $term->id_ontology_concept);
+    		} else {
+    			$dictionary[$term->string] = array($term->id_ontology_concept);
+    		}
     	}
 
 

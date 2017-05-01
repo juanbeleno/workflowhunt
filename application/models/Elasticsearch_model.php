@@ -357,7 +357,12 @@ class Elasticsearch_model extends CI_Model {
 	    	$dictionary_query = $this->db->get();
 
 	    	foreach ($dictionary_query->result() as $term) {
-	    		$dictionary[$term->string] = $term->complete_short_form;
+	    		$term->string = strtolower($term->string);
+	    		if(isset($dictionary[$term->string])){
+	    			array_push($dictionary[$term->string], $term->complete_short_form);
+	    		} else {
+	    			$dictionary[$term->string] = array($term->complete_short_form);
+	    		}
 	    	}
 
 	    	$query = replace_semantic_concepts_in_text($dictionary, $query);

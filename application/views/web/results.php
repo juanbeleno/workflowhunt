@@ -90,7 +90,7 @@
 					{
 				?>
 					<div class="results-found">
-						<p><?php print $total; ?> Resultados</p>
+						<p><?php print $total; ?> Results</p>
 						<div class="results-content">
 							<?php
 								foreach ($results as $workflow) 

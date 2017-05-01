@@ -57,13 +57,16 @@ if(!function_exists('get_semantic_annotations_from_text'))
     	$annotations = array();
         // This is hacky
         $text = " ".$text." ";
-    	foreach ($dictionary as $string => $concept) {
+    	foreach ($dictionary as $string => $conceptList) {
             // This is hacky
             $string = " ".$string." ";
 
     		$pos = stripos($text, $string);
     		if ($pos !== false) {
-    			$annotations[] = $concept;
+                // TODO: Solve the problem of homonyms
+                foreach ($conceptList as $concept) {
+                    $annotations[] = $concept;
+                }
     			$wildcard = str_repeat(" ", strlen($string));
     			$text = str_ireplace($string, $wildcard, $text);
     		}
@@ -87,14 +90,17 @@ if(!function_exists('replace_semantic_concepts_in_text'))
     function replace_semantic_concepts_in_text($dictionary, $text){
         // This is hacky
         $text = " ".$text." ";
-        foreach ($dictionary as $string => $concept) {
+        foreach ($dictionary as $string => $conceptList) {
             // This is hacky
             $string = " ".$string." ";
-            $concept = " ".$concept." ";
+            $str_concept = " ";
+            foreach ($conceptList as $concept) {
+                $str_concept .= $concept." ";
+            }
 
             $pos = stripos($text, $string);
             if ($pos !== false) {
-                $text = str_ireplace($string, $concept, $text);
+                $text = str_ireplace($string, $str_concept, $text);
             }
         }
 

@@ -74,6 +74,13 @@ class Workflow_model extends CI_Model {
 	public $tags;
 
 	/**
+	 * Workflow URL from API
+	 *
+	 * @var	string
+	 */
+	private $WORKFLOW_SEARCH_URL = "http://www.myexperiment.org/search.xml";
+
+	/**
 	 * Workflows URL from API
 	 *
 	 * @var	string
@@ -156,6 +163,66 @@ class Workflow_model extends CI_Model {
     	$this->db->insert_batch('workflow', $workflows);
 
     	return array('status' => 'OK');
+    }
+
+    // --------------------------------------------------------------------
+
+    /**
+	 * Search Workflows based on Metadata via myExperiment
+	 *
+	 * This is a keyword-based approach and uses solr; however, we don't
+	 * have access to the internal configurations of the server, so we
+	 * need to apply reverse engineering to try to figure out.
+	 * #Descubra
+	 *
+	 * @param	int	$query	User's query in the interface
+	 * @param 	int $offset Offset of the results
+	 * @param 	int $size 	Size of the results
+	 * @return	array
+	 */
+    public function myexp_keyword_search($query, $offset = 0, $size = 10)
+    {
+    	$results = array();
+
+		// Construct a URL to search the workflows
+		$PARAMS = "query=".$query."&num=".$size."&page=".($offset/$size + 1);
+		$url = $this->WORKFLOW_SEARCH_URL."?".$PARAMS;
+
+		// Request the content in XML format
+		$context  = stream_context_create(
+						array(
+							'http' => array(
+										'header' => 'Accept: application/xml'
+										)
+							)
+						);
+
+		$xml = file_get_contents($url, false, $context);
+		$xml = simplexml_load_string($xml);
+
+		if(!empty($xml))
+		{
+			// If the content is converted into XML, we'll create the array
+			// of workflow ids
+			foreach ($xml->children() as $workflow) 
+			{
+				$id_workflow = (int)$workflow['id'];
+				if($workflow->getName() == "workflow"){
+					$results[] = array('_id' => $id_workflow);
+				}
+			}
+		} else {
+			return array(
+					'status' => 'BAD',
+					'msg' => 'There are not results.'
+				);
+		}
+
+		return array(
+					'status' => 'OK',
+					'results' => $results,
+					'total' => count($results)
+				);
     }
 
     // --------------------------------------------------------------------

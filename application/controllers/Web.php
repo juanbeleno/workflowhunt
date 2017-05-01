@@ -8,6 +8,7 @@ class Web extends CI_Controller {
         parent::__construct();
         $this->load->model('elasticsearch_model');
         $this->load->model('semantic_model');
+        $this->load->model('workflow_model');
     }
 
 	public function index()
@@ -64,6 +65,27 @@ class Web extends CI_Controller {
 		$data['pagination'] = $this->pagination;
 
 		$this->load->view('web/results', $data);
+	}
+
+	public function create_comparison()
+	{
+		$query = @$this->input->get('query', TRUE);
+		$size = 5000;
+		$offset = 0;
+		
+		$myexp_results = $this->workflow_model->myexp_keyword_search($query, $offset, $size);
+		$keyword_search_results = $this->elasticsearch_model->keyword_search($query, $offset, $size);
+		$semantic_search_results = $this->elasticsearch_model->semantic_search($query, $offset, $size);
+
+		$this->load->helper('test');
+
+		$response = get_search_comparison(	$myexp_results['results'], 
+    										$keyword_search_results['results'], 
+    										$semantic_search_results['results']);
+
+		$response['query'] = $query;
+		
+		$this->load->view('web/test', $response);
 	}
 
 	public function workflow()
