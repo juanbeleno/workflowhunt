@@ -79,9 +79,9 @@ class Web extends CI_Controller {
 
 		$this->load->helper('test');
 
-		$response = get_search_comparison(	$myexp_results['results'], 
-    										$keyword_search_results['results'], 
-    										$semantic_search_results['results']);
+		$response = get_search_comparison(	$myexp_results, 
+    										$keyword_search_results, 
+    										$semantic_search_results);
 
 		$response['query'] = $query;
 		

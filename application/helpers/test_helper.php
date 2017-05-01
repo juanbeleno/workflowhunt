@@ -65,17 +65,23 @@ if(!function_exists('get_search_comparison'))
     	$B = array();
     	$C = array();
 
-    	foreach ($myexp_results as $workflow) {
-    		$A[] = $workflow['_id'];
-    	}
+        if(isset($myexp_results['results'])){
+        	foreach ($myexp_results['results'] as $workflow) {
+        		$A[] = $workflow['_id'];
+        	}
+        }
 
-    	foreach ($keyword_search_results as $workflow) {
-    		$B[] = $workflow['_id'];
-    	}
+        if(isset($keyword_search_results['results'])){
+            foreach ($keyword_search_results['results'] as $workflow) {
+        		$B[] = $workflow['_id'];
+        	}
+        }
 
-    	foreach ($semantic_search_results as $workflow) {
-    		$C[] = $workflow['_id'];
-    	}
+        if(isset($semantic_search_results['results'])){
+        	foreach ($semantic_search_results['results'] as $workflow) {
+        		$C[] = $workflow['_id'];
+        	}
+        }
 
     	// Intersection
     	$Int_A_B = array_intersect($A, $B);

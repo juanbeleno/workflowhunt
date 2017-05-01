@@ -82,6 +82,7 @@
 							<li>Make your queries as concise as possible.</li>
 						</ul>
 						<!-- ul -->
+						<a target="_blank" href="<?php print base_url().'index.php/web/create_comparison?query='.$query; ?>">Compare Results</a>
 					</div>
 					<!-- .results-not-found -->
 				<?php 	
@@ -90,7 +91,10 @@
 					{
 				?>
 					<div class="results-found">
-						<p><?php print $total; ?> Results</p>
+						<p>
+							<?php print $total; ?> Results - 
+							<a target="_blank" href="<?php print base_url().'index.php/web/create_comparison?query='.$query; ?>">Compare Results</a>
+						</p>
 						<div class="results-content">
 							<?php
 								foreach ($results as $workflow) 
