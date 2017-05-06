@@ -226,7 +226,34 @@ class Elasticsearch_model extends CI_Model {
 		    'body' => [
 		        'settings' => [
 		            'number_of_shards' => 2,
-		            'number_of_replicas' => 0
+		            'number_of_replicas' => 0,
+		            "analysis" => [
+			            "filter" => [
+			                "english_stop" => [
+			                    "type" =>      "standard",
+			                    "stopwords" => "_spanish_"
+			                ],
+			                "english_stemmer"=> [
+					          "type" =>       "stemmer",
+					          "language"=>   "english"
+					        ],
+					        "english_possessive_stemmer" => [
+					          "type" =>       "stemmer",
+					          "language" =>   "possessive_english"
+					        ]
+			            ], 
+			            "analyzer" => [
+				            "english" => [
+				                "tokenizer" => "standard",
+				                "filter" => [
+				                	"english_possessive_stemmer",
+						            "lowercase",
+						            "english_stop",
+						            "english_stemmer"
+				                ]
+				            ]
+				        ]
+			        ]
 		        ]
 		    ]
 		];
@@ -261,7 +288,34 @@ class Elasticsearch_model extends CI_Model {
 		    'body' => [
 		        'settings' => [
 		            'number_of_shards' => 2,
-		            'number_of_replicas' => 0
+		            'number_of_replicas' => 0,
+		            "analysis" => [
+			            "filter" => [
+			                "english_stop" => [
+			                    "type" =>      "standard",
+			                    "stopwords" => "_spanish_"
+			                ],
+			                "english_stemmer"=> [
+					          "type" =>       "stemmer",
+					          "language"=>   "english"
+					        ],
+					        "english_possessive_stemmer" => [
+					          "type" =>       "stemmer",
+					          "language" =>   "possessive_english"
+					        ]
+			            ], 
+			            "analyzer" => [
+				            "english" => [
+				                "tokenizer" => "standard",
+				                "filter" => [
+				                	"english_possessive_stemmer",
+						            "lowercase",
+						            "english_stop",
+						            "english_stemmer"
+				                ]
+				            ]
+				        ]
+			        ]
 		        ]
 		    ]
 		];
@@ -301,7 +355,7 @@ class Elasticsearch_model extends CI_Model {
 			    		'simple_query_string' => [
 				    		'fields' => ['title', 'description', 'tags'],
 				    		'query' => $query,
-				    		'minimum_should_match' => 1
+				    		'minimum_should_match' => '75%'
 			    		]
 			    	]
 			    ]
@@ -378,7 +432,7 @@ class Elasticsearch_model extends CI_Model {
 			    		'simple_query_string' => [
 				    		'fields' => ['title', 'description', 'tags', 'semantic_annotations'],
 				    		'query' => $query,
-				    		'minimum_should_match' => 1
+				    		'minimum_should_match' => '75%'
 			    		]
 			    	]
 			    ]
