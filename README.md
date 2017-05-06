@@ -12,11 +12,14 @@ This project was built in PHP using CodeIgniter as back-end framework and Bootst
 4. Setup your favourite web environment for PHP. I personally use AWS (EC2, RDS, and Route 53). Nevertheless, for testing your can download XAMPP (for Windows) or LAMPP (for Linux).
 5. Create a database with name `workflowhunt`. For LAMPP/XAMPP the database is MySQL.
 6. Setup CodeIgnite. Usually, I just configure 4 files:
+
 6.1. `application/config/autoload.php`: This file setup the packages, libraries, drivers, helpers, languages, models, etc that will be loaded when the project run for first time. 
 Replace 
 
 ```
-$autoload['libraries'] = array();` 
+$autoload['libraries'] = array();
+```
+
 By 
 
 ```
