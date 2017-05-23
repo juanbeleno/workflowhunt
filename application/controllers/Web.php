@@ -9,6 +9,7 @@ class Web extends CI_Controller {
         $this->load->model('elasticsearch_model');
         $this->load->model('semantic_model');
         $this->load->model('workflow_model');
+        $this->load->model('log_model');
     }
 
 	public function index()
@@ -27,10 +28,14 @@ class Web extends CI_Controller {
 		if($method == "semantics")
 		{
 			$response = $this->elasticsearch_model->semantic_search($query, $offset);
+			// Save the query in the Log Manager
+			$this->log_model->save($query, "Semantics");
 		}
 		else
 		{
 			$response = $this->elasticsearch_model->keyword_search($query, $offset);
+			// Save the query in the Log Manager
+			$this->log_model->save($query, "Keyword");
 		}
 
 		$data['query'] = @$query;

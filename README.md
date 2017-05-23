@@ -7,7 +7,7 @@ WorkflowHunt is a search engine for scientific workflow repositories. See [Workf
 This project was built in PHP using CodeIgniter as back-end framework and Bootstrap as front-end framework. The steps to setup the project are explained as follows:
 
 1. Download [Codeigniter](https://www.codeigniter.com/) 3.1.4 
-2. Clone this project using git (`git clone https://github.com/jbeleno/workflowhunt.git) or download the [ZIP](https://github.com/jbeleno/workflowhunt/archive/master.zip)
+2. Clone this project using git (`git clone https://github.com/jbeleno/workflowhunt.git`) or download the [ZIP](https://github.com/jbeleno/workflowhunt/archive/master.zip)
 3. Replace the files and directories in CodeIgniter using the files and directories in this project.
 4. Setup your favourite web environment for PHP. I personally use AWS (EC2, RDS, and Route 53). Nevertheless, for testing your can download XAMPP (for Windows) or LAMPP (for Linux).
 5. Create a database with name `workflowhunt`. For LAMPP/XAMPP the database is MySQL.
