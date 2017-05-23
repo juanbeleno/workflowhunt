@@ -1,6 +1,15 @@
 Query,|A|,|B|,|C|,|A ∩ B|,|B ∩ C|,|C ∩ A|,|A ∩ B ∩ C|,|A - B|,|A - C|,|B - C|,|C - B|,|C - A|,|B - A|,|A - (B U C)|,|B - (C U A)|,|C - (A U B)|
-High throughput sequencing,4,3,40,0,0,0,0,4,4,3,40,40,3,4,3,40
-Ecology,24,19,42,19,18,21,18,5,3,1,24,21,0,2,0,21
-Pathway simulation,19,140,0,17,0,0,0,2,19,140,0,0,123,2,123,0
-Chromosomes,1,1,77,1,1,1,1,0,0,0,76,76,0,0,0,76
-Enzymes,16,8,11,8,8,9,8,8,7,0,3,2,0,7,0,2
+high throughput sequencing,4,3,40,0,0,0,0,4,4,3,40,40,3,4,3,40
+ecology,24,19,42,19,18,21,18,5,3,1,24,21,0,2,0,21
+pathway simulation,19,140,0,17,0,0,0,2,19,140,0,0,123,2,123,0
+chromosomes,1,1,77,1,1,1,1,0,0,0,76,76,0,0,0,76
+enzymes,16,8,11,8,8,9,8,8,7,0,3,2,0,7,0,2
+enzyme,11,7,11,7,7,8,7,4,3,0,4,3,0,3,0,3
+chromosome,74,35,77,35,28,31,28,39,43,7,49,46,0,36,0,46
+identifying the candidate pathways from gene expression data,9,12,10,7,10,7,7,2,2,2,0,3,5,2,2,0
+find the candidate pathways in microarray data,23,15,19,0,8,2,0,23,21,7,11,17,15,21,7,9
+protein sequence analysis,21,120,1,10,1,1,1,11,20,119,0,0,110,11,110,0
+phylogenetic analysis,14,232,248,14,208,14,14,0,0,24,40,234,218,0,24,40
+differences between two raster layers,16,6,6,6,6,6,6,10,10,0,0,0,0,10,0,0
+gene annotation,19,239,2,12,2,0,0,7,19,237,0,2,227,7,225,0
+map microarray data onto metabolic pathway diagrams,21,1,1,0,1,0,0,21,21,0,0,1,1,21,0,0
